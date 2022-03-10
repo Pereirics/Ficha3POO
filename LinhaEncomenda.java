@@ -61,15 +61,31 @@ public class LinhaEncomenda {
         this.desconto = desconto;
     }
 
-    public void setImposto(double imposto){
-        this.imposto = imposto;
+    public void setImposto(double imposto){ this.imposto = imposto; }
+
+    public boolean equals(Object o){
+        if (this == o) return true;
+        if ((o == null) || (this.getClass() != o.getClass())) return false;
+        LinhaEncomenda e = (LinhaEncomenda) o;
+        return (
+                this.referenciaProduto == e.getReferenciaProduto() && this.descricaoProduto == e.getDescricaoProduto()
+                && this.desconto == e.getDesconto() && this.imposto == e.getImposto() && this.precoAntesImposto == e.getPrecoAntesImposto()
+                && this. quantidadeEncomendada == e.getQuantidadeEncomendada()
+        );
+    }
+
+    public String toString(){
+        String sb = "Linha Encomenda: (Referência do Produto: " + this.referenciaProduto + ", Descrição do Produto: " + this.descricaoProduto + ", Preço antes Imposto: " +
+                this.precoAntesImposto + ", Quantidade Encomendada: " + this.quantidadeEncomendada + ", Imposto: " +
+                this.imposto + ", Desconto: " + this.desconto;
+        return sb;
     }
 
     public double calculaValorLinhaEnc(){
-        return (getPrecoAntesImposto() - (getPrecoAntesImposto()* getDesconto() / 100)) + ((getPrecoAntesImposto() - (getPrecoAntesImposto()* getDesconto() / 100)) * getImposto() / 100);
+        return (getPrecoAntesImposto() - (getPrecoAntesImposto() * getDesconto() / 100)) + ((getPrecoAntesImposto() - (getPrecoAntesImposto() * getDesconto() / 100)) * getImposto() / 100);
     }
 
     public double calculaValorDesconto(){
-        return
+        return (getPrecoAntesImposto() * getDesconto() / 100);
     }
 }

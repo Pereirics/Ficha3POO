@@ -7,6 +7,6 @@ public class Main {
         e.setDesconto(10);
         e.setImposto(23);
         e.setPrecoAntesImposto(100);
-        out.print(e.calculaValorLinhaEnc());
+        out.print(e.toString());
     }
 }
