@@ -77,10 +77,9 @@ public class LinhaEncomenda {
     }
 
     public String toString(){
-        String sb = "Linha Encomenda: (Referência do Produto: " + this.referenciaProduto + ", Descrição do Produto: " + this.descricaoProduto + ", Preço antes Imposto: " +
+        return "Linha Encomenda: (Referência do Produto: " + this.referenciaProduto + ", Descrição do Produto: " + this.descricaoProduto + ", Preço antes Imposto: " +
                 this.precoAntesImposto + ", Quantidade Encomendada: " + this.quantidadeEncomendada + ", Imposto: " +
                 this.imposto + ", Desconto: " + this.desconto;
-        return sb;
     }
 
     public double calculaValorLinhaEnc(){
