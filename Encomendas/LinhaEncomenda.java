@@ -76,6 +76,7 @@ public class LinhaEncomenda {
         );
     }
 
+    @Override
     public String toString(){
         return "Linha Encomenda: (Referência do Produto: " + this.referenciaProduto + ", Descrição do Produto: " + this.descricaoProduto + ", Preço antes Imposto: " +
                 this.precoAntesImposto + ", Quantidade Encomendada: " + this.quantidadeEncomendada + ", Imposto: " +

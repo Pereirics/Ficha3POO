@@ -10,14 +10,14 @@ public class Encomenda {
     private int nifCliente;
     private String moradaCliente;
     private String dataEncomenda;
-    private String[] linhasEncomenda;
+    private LinhaEncomenda[] linhasEncomenda;
 
     public Encomenda(){
         this.nomeCliente = "";
         this.nifCliente = 0;
         this.moradaCliente = "";
         this.dataEncomenda = "";
-        this.linhasEncomenda = new String[0];
+        this.linhasEncomenda = new LinhaEncomenda[0];
     }
 
     public String getNomeCliente() {
@@ -36,7 +36,7 @@ public class Encomenda {
         return dataEncomenda;
     }
 
-    public String[] getLinhasEncomenda() {
+    public LinhaEncomenda[] getLinhasEncomenda() {
         return linhasEncomenda;
     }
 
@@ -56,7 +56,7 @@ public class Encomenda {
         this.dataEncomenda = dataEncomenda;
     }
 
-    public void setLinhasEncomenda(String[] linhasEncomenda) {
+    public void setLinhasEncomenda(LinhaEncomenda[] linhasEncomenda) {
         this.linhasEncomenda = linhasEncomenda;
     }
 
@@ -81,11 +81,49 @@ public class Encomenda {
 
     public double calculaValorTotal(){
         double total = 0;
-        for (int i = 0; i < linhasEncomenda.length; i++){
-            LinhaEncomenda l = (LinhaEncomenda) linhasEncomenda[i];
-            l.calculaValorLinhaEnc();
+        for (LinhaEncomenda linhaEncomenda : linhasEncomenda) {
+            total += linhaEncomenda.calculaValorLinhaEnc();
         }
         return total;
+    }
+
+    public double calculaValorDesconto(){
+        double total = 0;
+        for (LinhaEncomenda linhaEncomenda : linhasEncomenda){
+            total += linhaEncomenda.calculaValorDesconto();
+        }
+        return total;
+    }
+
+    public int numeroTotalProdutos(){
+        int total = 0;
+        for(LinhaEncomenda linhaEncomenda : linhasEncomenda){
+            total += linhaEncomenda.getQuantidadeEncomendada();
+        }
+        return total;
+    }
+
+    public boolean existeProdutoEncomenda(String refProduto){
+        for (LinhaEncomenda linhaEncomenda : linhasEncomenda){
+            if (linhaEncomenda.getReferenciaProduto().equals(refProduto)) return true;
+        }
+        return false;
+    }
+
+    public void adicionaLinha(LinhaEncomenda linha){
+        linhasEncomenda = Arrays.copyOf(linhasEncomenda, linhasEncomenda.length + 1);
+        linhasEncomenda[linhasEncomenda.length - 1] = linha;
+    }
+
+    public void removeProduto(String codProd){
+        LinhaEncomenda[] novo = new LinhaEncomenda[linhasEncomenda.length - 1];
+        for (int i = 0; i < linhasEncomenda.length; i++){
+            if (linhasEncomenda[i].getReferenciaProduto().equals(codProd)){
+                System.arraycopy(linhasEncomenda, 0, novo, 0, i);
+                System.arraycopy(linhasEncomenda, i + 1, novo, i, linhasEncomenda.length - (i + 1));
+            }
+        }
+        linhasEncomenda = novo;
     }
 }
 
