@@ -1,6 +1,7 @@
 import Encomendas.LinhaEncomenda;
 import Encomendas.LinhaEncomenda.*;
 
+import java.time.LocalDate;
 import java.util.Arrays;
 
 public class Encomenda {
@@ -9,14 +10,14 @@ public class Encomenda {
     private String nomeCliente;
     private int nifCliente;
     private String moradaCliente;
-    private String dataEncomenda;
+    private LocalDate dataEncomenda;
     private LinhaEncomenda[] linhasEncomenda;
 
     public Encomenda(){
         this.nomeCliente = "";
         this.nifCliente = 0;
         this.moradaCliente = "";
-        this.dataEncomenda = "";
+        this.dataEncomenda = LocalDate.now();
         this.linhasEncomenda = new LinhaEncomenda[0];
     }
 
@@ -32,7 +33,7 @@ public class Encomenda {
         return moradaCliente;
     }
 
-    public String getDataEncomenda() {
+    public LocalDate getDataEncomenda() {
         return dataEncomenda;
     }
 
@@ -52,7 +53,7 @@ public class Encomenda {
         this.moradaCliente = moradaCliente;
     }
 
-    public void setDataEncomenda(String dataEncomenda) {
+    public void setDataEncomenda(LocalDate dataEncomenda) {
         this.dataEncomenda = dataEncomenda;
     }
 

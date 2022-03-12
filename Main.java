@@ -1,13 +1,13 @@
 import static java.lang.System.out;
 import Encomendas.LinhaEncomenda;
 import java.util.Scanner;
+import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
         LinhaEncomenda e = new LinhaEncomenda();
         Encomenda E = new Encomenda();
         Scanner sc = new Scanner(System.in);
-        boolean flag = true;
 
         while (true) {
             out.print("Quer criar uma nova encomenda? (S/N)");
@@ -18,11 +18,17 @@ public class Main {
                     E.setNomeCliente(sc.nextLine());
                     out.print("Insira o NIF do cliente: (Int)");
                     E.setNifCliente(sc.nextInt());
+                    sc.nextLine();
                     out.print("Insira a morada do cliente: (String)");
                     E.setMoradaCliente(sc.nextLine());
-                    out.print("Insira a data da encomenda: (String)");
-                    E.setDataEncomenda(sc.nextLine());
-
+                    out.println("Insira a data da encomenda: (String)");
+                    out.print("Insira o dia da encomenda: ");
+                    int dia = sc.nextInt();
+                    out.print("Insira o mês da encomenda: ");
+                    int mes = sc.nextInt();
+                    out.print("Insira o ano da encomenda: ");
+                    int ano = sc.nextInt();
+                    E.setDataEncomenda(LocalDate.of(ano, mes, dia));
                     out.print("Quer adicionar uma nova linha de encomenda? (S/N): ");
                     String linha_encomenda = sc.nextLine();
                     if ("S".equals(linha_encomenda)) {
@@ -65,43 +71,42 @@ public class Main {
                                 \s""");
                         int escolha = sc.nextInt();
                         switch (escolha) {
-                            case 1:
-                                out.print(E.toString());
-                                break;
-                            case 2:
+                            case 1 -> out.print(E);
+                            case 2 -> {
                                 out.print("Insira o novo nome do cliente: (String)");
                                 E.setNomeCliente(sc.nextLine());
-                                break;
-                            case 3:
+                            }
+                            case 3 -> {
                                 out.print("Insira o novo NIF do cliente: (Int)");
                                 E.setNifCliente(sc.nextInt());
-                                break;
-                            case 4:
+                                sc.nextLine();
+                            }
+                            case 4 -> {
                                 out.print("Insira a nova morada do cliente: (String)");
                                 E.setMoradaCliente(sc.nextLine());
-                                break;
-                            case 5:
+                            }
+                            case 5 -> {
                                 out.print("Insira a nova data da encomeda: (String)");
-                                E.setDataEncomenda(sc.nextLine());
-                                break;
-                            case 6:
-                                out.print(E.calculaValorTotal());
-                                break;
-                            case 7:
-                                out.print(E.calculaValorDesconto());
-                                break;
-                            case 8:
-                                out.print(E.numeroTotalProdutos());
-                                break;
-                            case 9:
+                                out.print("Insira o dia da encomenda: ");
+                                dia = sc.nextInt();
+                                out.print("Insira o mês da encomenda: ");
+                                mes = sc.nextInt();
+                                out.print("Insira o ano da encomenda: ");
+                                ano = sc.nextInt();
+                                E.setDataEncomenda(LocalDate.of(ano, mes, dia));
+                            }
+                            case 6 -> out.print(E.calculaValorTotal());
+                            case 7 -> out.print(E.calculaValorDesconto());
+                            case 8 -> out.print(E.numeroTotalProdutos());
+                            case 9 -> {
                                 out.print("Insira a referência do produto que pretende verificar se existe: (String)");
                                 out.print(E.existeProdutoEncomenda(sc.nextLine()));
-                                break;
-                            case 10:
+                            }
+                            case 10 -> {
                                 out.print("Insira a referência do produto que pretende remover: (String)");
                                 E.removeProduto(sc.nextLine());
-                                break;
-                            case 11:
+                            }
+                            case 11 -> {
                                 out.print("Insira a referência do produto: (String)");
                                 e.setReferenciaProduto(sc.nextLine());
                                 out.print("Insira a descrição do produto: (String)");
@@ -114,14 +119,10 @@ public class Main {
                                 e.setImposto(sc.nextDouble());
                                 out.print("Insira o desconto: (Double)");
                                 e.setDesconto(sc.nextDouble());
-
                                 E.adicionaLinha(e);
-                                break;
-                            case 12:
-                                flag = false;
-                                break;
-                            case 13:
-                                System.exit(0);
+                            }
+                            case 12 -> E = new Encomenda();
+                            case 13 -> System.exit(0);
                         }
                     }
             }
